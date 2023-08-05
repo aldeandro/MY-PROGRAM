@@ -1,0 +1,33 @@
+//Programmed By Aldeandro Rogan Marpaung
+//Follow me on Instagram : aldeandro_rmrp
+//Made For NodeMCU ESP8266
+
+//If you're using Arduino IDE, install MAX6675 Library to using this program
+#include "max6675.h"
+
+//Pin Definitions
+int thermoDO = 12; 
+int thermoCS = 15;
+int thermoCLK = 14;
+
+MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
+
+void setup() {
+  Serial.begin(9600);
+
+  Serial.println("MAX6675 test");
+  // wait for MAX chip to stabilize
+  delay(500);
+}
+
+void loop() {
+  // basic readout test, just print the current temperature 
+  
+  Serial.print("C = "); 
+  Serial.println(thermocouple.readCelsius());
+  Serial.print("F = ");
+  Serial.println(thermocouple.readFahrenheit());
+ 
+  // For the MAX6675 to update, you must delay AT LEAST 250ms between reads!
+  delay(1000);
+}
